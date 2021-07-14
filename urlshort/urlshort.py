@@ -85,5 +85,20 @@ def page_not_found(error):
 def session_api():
 	return jsonify(list(session.keys()))
 
+# for getting params from the URL
+@bp.route('/params')
+def params_test():
+	name = request.args.get('name')
+	age = int(request.args.get('age'))
+
+	# if age < 18, send mssg whch says its not allowed as an example
+	# 401 is warning HTTP error code
+	if age < 18:
+		return jsonify(message = p"sorry {name}, you are not old enough"), 401
+
+
+if __name__ == '__main__':
+	app.run(debug = True)
+
 				
 
